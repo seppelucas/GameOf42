@@ -2,39 +2,29 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define TRUE 1
+#define FALSE 0
+#define DEBUG 0
 
-int array[4];
-// Tom test v2
-/* Dit is de laatste, hoop ik */
+int input[4];
 
-
-
-void scaninput(){
-	printf("This is a game of 24 solver\nPlease input the 4 numbers you found in the deck\n");
-	for(int i=0;i<4;i++){
-		scanf("%d",&array[i]);
-	}
-	printf("your four numbers are: %d %d %d %d\nIs this correct? (y/n)",array[0], array[1], array[2], array[3]);
-
-// confirm if the input is right
-	char ch;
-	scanf("%c\n",&ch);
-	scanf("%c",&ch);
-
-	if(ch == 'n'){
-
-		printf("\nPlease try again\n");
-		scaninput();
-	}
-// check if the numbers are in the given range
-
-	for(int i=0;i<4;i++){
-		if(array[i] >12 || array[i] <= 0){
-			printf("\nplease input numbers in correct range and try again\n");
-			scaninput();
+void scanInput(){
+	//Input with confirmation
+	char yn = 'n';
+	while (yn != 'y') {
+		printf("Please input 4 numbers drawn from a deck:\n");
+		for (int i = 0; i < 4; i++) {
+			scanf("%i", &input[i]);
+		}
+		printf("Are these numbers correct?\nY / N\n");
+		scanf("\n");
+		scanf("%c", &yn);
+		if (yn == 'y') {
+			printf("Starting solving process.\n");
+		} else {
+			printf("Please try again.\n");
 		}
 	}
-
 }
 
 int options2(int a, int b, int i2){
@@ -55,25 +45,25 @@ int options2(int a, int b, int i2){
 	//}
 }
 
-void solvegame(int array[4]){
+void solvegame(int input[4]){
 
 	int total =0;
 	int k=0,l=0,o=0, scanning =1;
 
 	while(scanning){
-		if(24 == options2(options2(array[0],array[1],l),options2(array[2],array[3],o),k) ){ // (a b)(c d)
+		if(24 == options2(options2(input[0],input[1],l),options2(input[2],input[3],o),k) ){ // (a b)(c d)
 			printf("yes\n");
 			scanning =0;
 		}
-		if(24 == options2(   options2(options2(array[0],array[1],o),array[2],l) ,array[3],k)){// ((a b)c)d)
+		if(24 == options2(   options2(options2(input[0],input[1],o),input[2],l) ,input[3],k)){// ((a b)c)d)
 			printf("yes2\n");
 			scanning =0;
 		}
-		if(24 == options2(array[0],options2(options2(array[1],array[2],o),array[3],l),k)){ // (a((b c)d))
+		if(24 == options2(input[0],options2(options2(input[1],input[2],o),input[3],l),k)){ // (a((b c)d))
 			printf("yes3\n");
 			scanning =0;			
 		}
-		if(24 == options2(array[0],options2(array[1], options2(array[2],array[3],o),l),k)){ // (a(b(c d)))
+		if(24 == options2(input[0],options2(input[1], options2(input[2],input[3],o),l),k)){ // (a(b(c d)))
 			printf("yes4\n");
 			scanning =0;			
 		}
@@ -106,11 +96,5 @@ void solvegame(int array[4]){
 
 
 int main(int argc, char *argv[]){ 
-
-	scaninput();
-
-	// four operators + - * / 
-	solvegame(array);
-
-
+	scanInput();
 }

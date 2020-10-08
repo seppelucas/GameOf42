@@ -11,8 +11,7 @@
                 "-Wall",
                 "-pedantic",
                 "${fileDirname}/*.c",
-                "-o",
-                "${fileDirname}/a.out",
+                "-o ${fileDirname}/a.out",
                 "-fsanitize=address"
             ],
             "options": {
