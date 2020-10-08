@@ -7,6 +7,9 @@
 #define DEBUG 0
 
 int input[4];
+int originalinput[4];
+int intshuffle =0;
+int i;
 
 void scanInput(){
 	//Input with confirmation
@@ -15,6 +18,7 @@ void scanInput(){
 		printf("Please input 4 numbers drawn from a deck:\n");
 		for (int i = 0; i < 4; i++) {
 			scanf("%i", &input[i]);
+			originalinput[i] = input[i];
 		}
 		printf("Are these numbers correct?\nY / N\n");
 		scanf("\n");
@@ -27,6 +31,21 @@ void scanInput(){
 	}
 }
 
+void shuffle(int array[4],int intshuffle){
+	
+	for(i=0;i<4;i++){
+		int set;
+		set = i+intshuffle;
+		if(set = 4){
+			set =0;
+		}
+		array[i]= originalinput[set];
+	}
+
+	
+
+}
+
 int options2(int a, int b, int i2){
 
 	//for(;i2<4;i2++){
@@ -37,6 +56,9 @@ int options2(int a, int b, int i2){
 			return a-b;
 		}
 		if(i2 ==2){
+			if(b == 0){
+				return 0;
+			}
 			return a/b;
 		}
 		if(i2 ==3){
@@ -57,7 +79,7 @@ void solvegame(int input[4]){
 			printf("yes\n");
 			scanning =0;
 		}
-		if(24 == options2(   options2(options2(input[0],input[1],o),input[2],l) ,input[3],k)){// ((a b)c)d)
+		if(24 == options2( options2(options2(input[0],input[1],o),input[2],l) ,input[3],k)){// ((a b)c)d)
 			printf("yes2\n");
 			scanning =0;
 		}
@@ -79,6 +101,9 @@ void solvegame(int input[4]){
 					l=0;
 					if(o ==4){
 						printf("no solution for now");
+						//shuffle array 1/12th
+						shuffle(input, intshuffle);
+						solvegame(input);
 						scanning =0;
 					}
 				}
@@ -99,4 +124,5 @@ void solvegame(int input[4]){
 
 int main(int argc, char *argv[]){ 
 	scanInput();
+	solvegame(input);
 }
