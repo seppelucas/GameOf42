@@ -4,7 +4,7 @@
 
 
 int array[4];
-
+//Test comment
 
 
 void scaninput(){
