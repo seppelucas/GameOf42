@@ -64,6 +64,14 @@ void solvegame(int array[4]){
 			printf("yes\n");
 			scanning =0;
 		}
+		if(24 == options2(   options2(options2(array[0],array[1],o),array[2],l) ,array[3],k)){
+			printf("yes2\n");
+			scanning =0;
+		}
+		if(24 == options2(array[0],options2(options2(array[1],array[2],o),array[3],l),k)){
+			printf("yes3\n");
+			scanning =0;			
+		}
 		else{
 			k++;
 			if(k == 4){
@@ -84,6 +92,8 @@ void solvegame(int array[4]){
 			
 	}
 	}
+
+
 
 
 
