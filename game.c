@@ -52,12 +52,14 @@ int options2(int a, int b, int i2){
 		if(i2 ==3){
 			return a*b;
 		}
+		else{
+			return  0;
+		}
 	//}
 }
 
 void solvegame(int array[4]){
 
-	int total =0;
 	int k=0,l=0,o=0, scanning =1;
 
 	while(scanning){
