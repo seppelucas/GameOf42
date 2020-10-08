@@ -9,7 +9,7 @@
 int input[4];
 int originalinput[4];
 int intshuffle =0;
-int i;
+int i=0,j=0;
 
 void scanInput(){
 	//Input with confirmation
@@ -30,21 +30,50 @@ void scanInput(){
 		}
 	}
 }
-
-void shuffle(int array[4],int intshuffle){
-	
-	for(i=0;i<4;i++){
-		int set;
-		set = i+intshuffle;
-		if(set = 4){
-			set =0;
-		}
-		array[i]= originalinput[set];
-	}
-
-	
-
+void swap(int *a, int *b){
+    int temp;
+    temp = *a;
+    *a = *b;
+    *b = temp;
 }
+void randomize(int arr[], int n) {
+    //srand(time(NULL));
+    int i;
+    for(i = n-1; i > 0; i--) {
+        int j = rand() % (i+1);
+        swap(&arr[i], &arr[j]);
+    }
+}
+
+// void shuffle(int array[4],int intshuffle){
+// 	randomize(array,3);
+
+	// if(intshuffle > 4){
+	// 	for(;i<intshuffle;i++){
+	// 		swap(&array[i],&array[(i+intshuffle)%4]);
+		
+	// 	intshuffle = 0;
+	// }
+	// }
+	
+	// for(i=0;i<4;i++){
+	// 	int set;
+	// 	set = i+intshuffle;
+	// 	if(set = 4){
+	// 		set =0;
+	// 	}
+	// 	array[i]= originalinput[set];
+	// }
+	
+	// // for(i=0;i<intshuffle;i++){
+	// // 	for(j=0;j<intshuffle; j++){
+	// // 		swap(array[i],array[j]);
+	// // 	}
+	// // }
+
+
+
+//}
 
 int options2(int a, int b, int i2){
 
@@ -70,6 +99,21 @@ int options2(int a, int b, int i2){
 	//}
 }
 
+char getch(int a){
+	if(a == 0){
+		return '+';
+	}
+	if(a == 1){
+		return '-';
+	}
+	if(a == 2){
+		return '/';
+	}
+	if(a == 4){
+		return '*';
+	}
+}
+
 void solvegame(int input[4]){
 
 	int k=0,l=0,o=0, scanning =1;
@@ -77,15 +121,18 @@ void solvegame(int input[4]){
 	while(scanning){
 		if(24 == options2(options2(input[0],input[1],l),options2(input[2],input[3],o),k) ){ // (a b)(c d)
 			printf("yes\n");
+			printf("(%d %c %d) %c (%d %c %d )\n",input[0],getch(l),input[1],getch(k), input[2],getch(o),input[3]);
 			scanning =0;
 		}
 		if(24 == options2( options2(options2(input[0],input[1],o),input[2],l) ,input[3],k)){// ((a b)c)d)
 			printf("yes2\n");
 			scanning =0;
+			printf("(((%d %c %d)%c %d)%c %d)\n",input[0],getch(o),input[1],getch(l),input[2],getch(k),input[3]);
 		}
 		if(24 == options2(input[0],options2(options2(input[1],input[2],o),input[3],l),k)){ // (a((b c)d))
 			printf("yes3\n");
-			scanning =0;			
+			scanning =0;
+			printf("(%d %c((%d %c %d) %c %d)\n",input[0],getch(k),input[1],getch(l),input[2],getch(o),input[3]);		
 		}
 		if(24 == options2(input[0],options2(input[1], options2(input[2],input[3],o),l),k)){ // (a(b(c d)))
 			printf("yes4\n");
@@ -102,7 +149,7 @@ void solvegame(int input[4]){
 					if(o ==4){
 						printf("no solution for now");
 						//shuffle array 1/12th
-						shuffle(input, intshuffle);
+						randomize(input,3);
 						solvegame(input);
 						scanning =0;
 					}
