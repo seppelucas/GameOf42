@@ -1,0 +1,30 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+            "type": "shell",
+            "label": "gcc build sanitize",
+            "command": "/usr/bin/gcc",
+            "args": [
+                "-g",
+                "-std=c99",
+                "-Wall",
+                "-pedantic",
+                "${fileDirname}/*.c",
+                "-o",
+                "${fileDirname}/a.out",
+                "-fsanitize=address"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+				"kind": "build",
+				"isDefault": true
+			}
+        }
+	]
+}
