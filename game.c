@@ -4,7 +4,8 @@
 
 
 int array[4];
-//Test comment
+// seppe test
+
 
 
 void scaninput(){
@@ -19,13 +20,12 @@ void scaninput(){
 	scanf("%c\n",&ch);
 	scanf("%c",&ch);
 
-
-
 	if(ch == 'n'){
 
 		printf("\nPlease try again\n");
 		scaninput();
 	}
+	
 
 
 
