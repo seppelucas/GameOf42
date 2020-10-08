@@ -60,19 +60,19 @@ void solvegame(int array[4]){
 	int k=0,l=0,o=0, scanning =1;
 
 	while(scanning){
-		if(24 == options2(options2(array[0],array[1],l),options2(array[2],array[3],o),k) ){
+		if(24 == options2(options2(array[0],array[1],l),options2(array[2],array[3],o),k) ){ // (a b)(c d)
 			printf("yes\n");
 			scanning =0;
 		}
-		if(24 == options2(   options2(options2(array[0],array[1],o),array[2],l) ,array[3],k)){
+		if(24 == options2(   options2(options2(array[0],array[1],o),array[2],l) ,array[3],k)){// ((a b)c)d)
 			printf("yes2\n");
 			scanning =0;
 		}
-		if(24 == options2(array[0],options2(options2(array[1],array[2],o),array[3],l),k)){
+		if(24 == options2(array[0],options2(options2(array[1],array[2],o),array[3],l),k)){ // (a((b c)d))
 			printf("yes3\n");
 			scanning =0;			
 		}
-		if(24 == options2(array[0],options2(array[1], options2(array[2],array[3],o),l),k)){
+		if(24 == options2(array[0],options2(array[1], options2(array[2],array[3],o),l),k)){ // (a(b(c d)))
 			printf("yes4\n");
 			scanning =0;			
 		}
