@@ -15,7 +15,7 @@ void scaninput(){
 	}
 	printf("your four numbers are: %d %d %d %d\nIs this correct? (y/n)",array[0], array[1], array[2], array[3]);
 
-	// add yes/no option with second input possibility
+// confirm if the input is right
 	char ch;
 	scanf("%c\n",&ch);
 	scanf("%c",&ch);
@@ -25,15 +25,14 @@ void scaninput(){
 		printf("\nPlease try again\n");
 		scaninput();
 	}
-	
+// check if the numbers are in the given range
 
-
-
-
-
-
-	// add check that all 4 numbers are in a deck.
-
+	for(int i=0;i<4;i++){
+		if(array[i] >12 || array[i] <= 0){
+			printf("\nplease input numbers in correct range and try again\n");
+			scaninput();
+		}
+	}
 
 }
 
