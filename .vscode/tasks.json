@@ -10,8 +10,9 @@
                 "-std=c99",
                 "-Wall",
                 "-pedantic",
-                "${fileDirname}/*.c",
-                "-o ${fileDirname}/a.out",
+                "${fileDirname}/test.c",
+                "-o",
+                "${fileDirname}/a.out",
                 "-fsanitize=address"
             ],
             "options": {

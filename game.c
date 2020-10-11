@@ -15,7 +15,7 @@ int cnt;
 void scanInput(){
 	//Input with confirmation
 	char yn = 'n';
-	while (yn != 'y') {
+	while (yn != 'y' && yn != 'Y') {
 		printf("Please input 4 numbers drawn from a deck:\n");
 		for (int i = 0; i < 4; i++) {
 			scanf("%i", &input[i]);
@@ -24,16 +24,16 @@ void scanInput(){
 		printf("Are these numbers correct?\nY / N\n");
 		scanf("\n");
 		scanf("%c", &yn);
-		if (yn == 'y') {
+		if (yn == 'y' || yn == 'Y') {
 			printf("Starting solving process.\n");
 		} else {
 			printf("Please try again.\n");
 		}
 	}
 }
+
 void swap(int *a, int *b){
-    int temp;
-    temp = *a;
+    int temp = *a;
     *a = *b;
     *b = temp;
 }
@@ -69,7 +69,7 @@ int options2(int a, int b, int i2){
 	//}
 }
 
-char getch(int a){
+char getOperatorChar(int a){
 	if(a == 0){
 		return '+';
 	}
@@ -82,6 +82,7 @@ char getch(int a){
 	if(a == 3){
 		return 'x';
 	}
+	return '\0';
 }
 
 void solvegame(int input[4]){
@@ -90,20 +91,20 @@ void solvegame(int input[4]){
 
 	while(scanning){
 		if(24 == options2(options2(input[0],input[1],l),options2(input[2],input[3],o),k) ){ // (a b)(c d)
-			printf("(%d%c%d)%c(%d%c%d)\n",input[0],getch(l),input[1],getch(k), input[2],getch(o),input[3]);
+			printf("(%d%c%d)%c(%d%c%d)\n",input[0],getOperatorChar(l),input[1],getOperatorChar(k), input[2],getOperatorChar(o),input[3]);
 			scanning =0;
 		}
 		if(24 == options2( options2(options2(input[0],input[1],o),input[2],l) ,input[3],k)){// ((a b)c)d)
 			scanning =0;
-			printf("(((%d%c%d)%c%d)%c%d)\n",input[0],getch(o),input[1],getch(l),input[2],getch(k),input[3]);
+			printf("(((%d%c%d)%c%d)%c%d)\n",input[0],getOperatorChar(o),input[1],getOperatorChar(l),input[2],getOperatorChar(k),input[3]);
 		}
 		if(24 == options2(input[0],options2(options2(input[1],input[2],o),input[3],l),k)){ // (a((b c)d))
 			scanning =0;
-			printf("(%d%c((%d%c%d)%c%d)\n",input[0],getch(k),input[1],getch(l),input[2],getch(o),input[3]);		
+			printf("%d%c((%d%c%d)%c%d)\n",input[0],getOperatorChar(k),input[1],getOperatorChar(l),input[2],getOperatorChar(o),input[3]);		
 		}
 		if(24 == options2(input[0],options2(input[1], options2(input[2],input[3],o),l),k)){ // (a(b(c d)))
 			scanning =0;
-			printf("(%d%c(%d%c(%d%c%d)))\n",input[0],getch(k) , input[1],getch(l),input[2],getch(o),input[3]);	
+			printf("(%d%c(%d%c(%d%c%d)))\n",input[0],getOperatorChar(k) , input[1],getOperatorChar(l),input[2],getOperatorChar(o),input[3]);	
 		}
 		else{
 			k++;
