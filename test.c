@@ -1,9 +1,18 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include "safeMalloc.h"
 
+/* A recursive factorial function */
+int factorial(int n) {
+	if (n == 1) {
+		return n;
+	}
+	return n * factorial(n - 1);
+}
+
+/* Handles the input */
 void scanInput(int *array){
-	//Input with confirmation
 	char yn = 'n';
 	while (yn != 'y' && yn != 'Y') {
 		printf("Please input 4 numbers drawn from a deck:\n");
@@ -21,6 +30,8 @@ void scanInput(int *array){
 	}
 }
 
+/* Returns the result of an arithemtic operator, based on an input.
+Used best with a for-loop */
 int doOperation(int a, int b, int op) {
 	int result = -1;
 	switch(op) {
@@ -40,23 +51,32 @@ int doOperation(int a, int b, int op) {
 	return result;
 }
 
+/* Swap to values in an array */
 void swap(int *a, int *b) {
 	int temp = *a;
 	*a = *b;
 	*b = temp;
 }
 
-void reverseArray(int *array, int size) {
-	for (int i = 0; i < size / 2; i++) {
-		swap(&array[i], &array[size - 1 - i]);
+/* Reverses the order of values in an array */
+void reverseArray(int *array, int length) {
+	for (int i = 0; i < length / 2; i++) {
+		swap(&array[i], &array[length - 1 - i]);
 	}
 }
 
+/* Goes to the next permutation in an array, based on the iterator of a for loop.
+Best used in a loop.
+There are length! * 2 permutations of an array */
 void nextConfiguration(int *array, int length, int i) {
+	/* There are length * 2 steps in this algorithm before the pattern repeats itself */
 	int fullCircle = length * 2;
+	/* Every uneven step is to reverse */
 	if (i % 2 == 1) {
 		reverseArray(array, 4);
 	} else {
+	/* And every even step is to swap some numbers. First 0 and 1, then 1 and 2, then 2 and 3, and so on.
+	Until the last one has been reached, then you swap it with 0. */
 		i %= fullCircle;
 		if (i / 2 + 1 == length) {
 			swap(&array[i / 2], &array[0]);
@@ -66,10 +86,11 @@ void nextConfiguration(int *array, int length, int i) {
 	}
 }
 
-void displayArray(int *array, int size) {
+/* Prints an array of length */
+void printArray(int *array, int length) {
 	printf("{");
 	int first = 1;
-	for (int i = 0; i < size; i++) {
+	for (int i = 0; i < length; i++) {
 		if (!first) {
 			printf(", ");
 		}
@@ -80,15 +101,18 @@ void displayArray(int *array, int size) {
 }
 
 void solve(int *array) {
-
+	
 }
 
 int main(int argc, char *argv[]){
-	int input[4]; 
+	int length = 4;
+	int *input = safeMalloc(length * sizeof(int)); 
 	scanInput(input);
-	for (int i = 0; i < 24; i++) {
+	int permutations = factorial(length) * 2;
+	for (int i = 0; i < permutations; i++) {
 		nextConfiguration(input, 4, i);
-		displayArray(input, 4);
+		printArray(input, 4);
 		solve(input);
 	}
+	free(input);
 }
