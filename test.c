@@ -52,23 +52,16 @@ void reverseArray(int *array, int size) {
 	}
 }
 
-void nextConfiguration(int *array,int change) {
-	if (change % 2 == 1) {
+void nextConfiguration(int *array, int length, int i) {
+	int fullCircle = length * 2;
+	if (i % 2 == 1) {
 		reverseArray(array, 4);
 	} else {
-		switch (change) {
-			case 0:
-				swap(&array[0], &array[1]);
-				break;
-			case 2:
-				swap(&array[1], &array[2]);
-				break;
-			case 4:
-				swap(&array[2], &array[3]);
-				break;
-			case 6:
-				swap(&array[3], &array[0]);
-				break;
+		i %= fullCircle;
+		if (i / 2 + 1 == length) {
+			swap(&array[i / 2], &array[0]);
+		} else {
+			swap(&array[i / 2], &array[i / 2 + 1]);
 		}
 	}
 }
@@ -94,7 +87,7 @@ int main(int argc, char *argv[]){
 	int input[4]; 
 	scanInput(input);
 	for (int i = 0; i < 24; i++) {
-		nextConfiguration(input, i % 8);
+		nextConfiguration(input, 4, i);
 		displayArray(input, 4);
 		solve(input);
 	}
