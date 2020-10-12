@@ -31,7 +31,7 @@ void scanInput(int *array){
 }
 
 /* Returns the result of an arithemtic operator, based on an input.
-Used best with a for-loop */
+Used best with a loop */
 int doOperation(int a, int b, int op) {
 	int result = -1;
 	switch(op) {
@@ -65,8 +65,7 @@ void reverseArray(int *array, int length) {
 	}
 }
 
-/* Goes to the next permutation in an array, based on the iterator of a for loop.
-Best used in a loop.
+/* Goes to the next permutation in an array, based on the iterator of a loop.
 There are length! * 2 permutations of an array */
 void nextConfiguration(int *array, int length, int i) {
 	/* There are length * 2 steps in this algorithm before the pattern repeats itself */
