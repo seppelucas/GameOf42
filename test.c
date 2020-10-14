@@ -66,7 +66,7 @@ void reverseArray(int *array, int length) {
 }
 
 /* Goes to the next permutation in an array, based on the iterator of a loop.
-There are length! * 2 permutations of an array */
+There are length! permutations of an array */
 void nextConfiguration(int *array, int length, int i) {
 	/* There are length * 2 steps in this algorithm before the pattern repeats itself */
 	int fullCircle = length * 2;
